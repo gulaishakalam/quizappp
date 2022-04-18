@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1041336925020",
+    "project_id": "quizon-82038",
+    "storage_bucket": "quizon-82038.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1041336925020:android:e97e720b1c170d95a55f99",
+        "android_client_info": {
+          "package_name": "com.example.quizappp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1041336925020-c8klupbjgomhsl10s1pb93lvf8jvrajc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdf_mr51WZYMq4r-fY3m28Qk_xn5MIOPk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1041336925020-c8klupbjgomhsl10s1pb93lvf8jvrajc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

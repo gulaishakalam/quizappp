@@ -1,14 +1,15 @@
-package com;
+package com.example.quizappp;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
 
-import com.example.quizappp.R;
+import androidx.fragment.app.Fragment;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,6 +30,8 @@ public class CategoryFragment extends Fragment {
     public CategoryFragment() {
         // Required empty public constructor
     }
+    private GridView catview;
+    public static List<CategoryModel> catList=new ArrayList<>();
 
     /**
      * Use this factory method to create a new instance of
@@ -61,6 +64,20 @@ public class CategoryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_category, container, false);
+        View view= inflater.inflate(R.layout.fragment_category, container, false);
+        catview=view.findViewById(R.id.cat_Grid);
+        loadCategories();
+        CategoryAdapter adapter=new CategoryAdapter(catList);
+        catview.setAdapter(adapter);
+        return view;
+    }
+    private void loadCategories()
+    {
+        catList.clear();
+        catList.add(new CategoryModel("1","APTITUDE",20));
+        catList.add(new CategoryModel("2","JAVA",30));
+        catList.add(new CategoryModel("3","DATA STRUCTURES",10));
+        catList.add(new CategoryModel("4","DBMS",25));
+        catList.add(new CategoryModel("5","GK",20));
     }
 }
