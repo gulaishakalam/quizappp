@@ -11,6 +11,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class splashActivity extends AppCompatActivity {
     private TextView appName;
@@ -25,6 +26,8 @@ public class splashActivity extends AppCompatActivity {
         Animation anim= AnimationUtils.loadAnimation(this,R.anim.myanim);
         appName.setAnimation(anim);
         mAuth=FirebaseAuth.getInstance();
+
+        DbQuery.g_Firestore = FirebaseFirestore.getInstance();
 
 
 

@@ -101,16 +101,30 @@ public class SignUpActivity extends AppCompatActivity {
     }
     private void signupNewUser(){
         progressDialog.show();
+
         mAuth.createUserWithEmailAndPassword(emailStr, passStr)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Toast.makeText(SignUpActivity.this, "Sign Up Successfull ", Toast.LENGTH_SHORT).show();
-                            progressDialog.dismiss();
-                            Intent intent=new Intent(SignUpActivity.this,MainActivity.class);
-                            startActivity(intent);
-                            SignUpActivity.this.finish();
+                            DbQuery.createUserData(emailStr,nameStr, new MyCompleteListener() {
+                                @Override
+                                public void onSuccess() {
+                                    progressDialog.dismiss();
+                                    Intent intent=new Intent(SignUpActivity.this,MainActivity.class);
+                                    startActivity(intent);
+                                    SignUpActivity.this.finish();
+                                }
+
+                                @Override
+                                public void onFailure() {
+                                    Toast.makeText(SignUpActivity.this, "Something went wrong ! Please Try Again Later !", Toast.LENGTH_SHORT).show();
+                                    progressDialog.dismiss();
+
+                                }
+                            });
+
                         } else {
                             // If sign in fails, display a message to the user.
                             progressDialog.dismiss();
