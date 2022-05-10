@@ -31,7 +31,7 @@ public class CategoryFragment extends Fragment {
         // Required empty public constructor
     }
     private GridView catview;
-    public static List<CategoryModel> catList=new ArrayList<>();
+
 
     /**
      * Use this factory method to create a new instance of
@@ -66,18 +66,10 @@ public class CategoryFragment extends Fragment {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_category, container, false);
         catview=view.findViewById(R.id.cat_Grid);
-        loadCategories();
-        CategoryAdapter adapter=new CategoryAdapter(catList);
+       // loadCategories();
+        CategoryAdapter adapter=new CategoryAdapter(DbQuery.g_catList);
         catview.setAdapter(adapter);
         return view;
     }
-    private void loadCategories()
-    {
-        catList.clear();
-        catList.add(new CategoryModel("1","APTITUDE",20));
-        catList.add(new CategoryModel("2","JAVA",30));
-        catList.add(new CategoryModel("3","DATA STRUCTURES",10));
-        catList.add(new CategoryModel("4","DBMS",25));
-        catList.add(new CategoryModel("5","GK",20));
-    }
+
 }

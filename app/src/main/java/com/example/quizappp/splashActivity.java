@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -44,9 +45,22 @@ public class splashActivity extends AppCompatActivity {
 
                if(mAuth.getCurrentUser() != null)
                {
-                   Intent i=new Intent(splashActivity.this,LoginActivity.class);
-                   startActivity(i);
-                   splashActivity.this.finish();
+                   DbQuery.loadCategories(new MyCompleteListener() {
+                       @Override
+                       public void onSuccess() {
+                           Intent i=new Intent(splashActivity.this,LoginActivity.class);
+                           startActivity(i);
+                           splashActivity.this.finish();
+                       }
+
+                       @Override
+                       public void onFailure() {
+                           Toast.makeText(splashActivity.this, "Something went wrong ! Please Try Again Later !", Toast.LENGTH_SHORT).show();
+
+                       }
+                   });
+
+
                }
                else
                {

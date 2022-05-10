@@ -1,5 +1,6 @@
 package com.example.quizappp;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,12 +47,21 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.ViewHolder> {
             testNo=itemView.findViewById(R.id.testNo);
             topScore=itemView.findViewById(R.id.scoreText);
             progressBar=itemView.findViewById(R.id.testprogressbar);
+
         }
         private void setData(int pos,int progress)
         {
             testNo.setText("Test No : "+String.valueOf(pos+1));
             topScore.setText(String.valueOf(progress)+" %");
             progressBar.setProgress(progress);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    DbQuery.g_selected_test_index= pos;
+                    Intent intent=new Intent(itemView.getContext(),StartTestActivity.class);
+                    itemView.getContext().startActivity(intent);
+                }
+            });
         }
     }
 
