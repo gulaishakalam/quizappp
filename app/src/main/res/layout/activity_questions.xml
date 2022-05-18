@@ -156,4 +156,14 @@
        app:layout_constraintEnd_toEndOf="parent"
        app:layout_constraintTop_toBottomOf="@id/ll4"></androidx.recyclerview.widget.RecyclerView>
 
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/marked_text"
+        android:id="@+id/marked_image"
+        android:visibility="gone"
+        android:elevation="5dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ll4"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

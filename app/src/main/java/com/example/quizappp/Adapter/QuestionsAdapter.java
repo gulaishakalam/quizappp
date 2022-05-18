@@ -1,4 +1,9 @@
-package com.example.quizappp;
+package com.example.quizappp.Adapter;
+
+import static com.example.quizappp.DbQuery.ANSWERED;
+import static com.example.quizappp.DbQuery.REVIEW;
+import static com.example.quizappp.DbQuery.UNANSWERED;
+import static com.example.quizappp.DbQuery.g_quesList;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +13,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.quizappp.DbQuery;
+import com.example.quizappp.R;
+import com.example.quizappp.models.QuestionModel;
 
 import java.util.List;
 
@@ -59,10 +68,10 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
             optionC.setText(questionList.get(pos).getOptionC());
             optionD.setText(questionList.get(pos).getOptionD());
 
-            setOption(optionA, 1, pos);
-            setOption(optionB, 2, pos);
-            setOption(optionC, 3, pos);
-            setOption(optionD, 4, pos);
+//            setOption(optionA, 1, pos);
+//            setOption(optionB, 2, pos);
+//            setOption(optionC, 3, pos);
+//            setOption(optionD, 4, pos);
 
             optionA.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -92,35 +101,45 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
         }
 
         private void selectOption(Button btn, int option_num, int quesID) {
-            if (prevSelectB == null)
-            {
-                btn.setBackgroundColor(R.drawable.selected_btn);
+            if (prevSelectB == null) {
+                btn.setBackgroundResource(R.drawable.selected_btn);
                 DbQuery.g_quesList.get(quesID).setSelectedAns(option_num);
+                changeStatus(quesID,ANSWERED);
                 prevSelectB = btn;
-            } else
-            {
+            } else {
                 if (prevSelectB.getId() == btn.getId())//if button selected by user is alreasy selected then unselect it
                 {
                     btn.setBackgroundResource(R.drawable.unselected_btn);
                     DbQuery.g_quesList.get(quesID).setSelectedAns(-1);//no option is selected
+                    changeStatus(quesID,UNANSWERED);
                     prevSelectB = null;
                 } else {
-                    prevSelectB.setBackgroundColor(R.drawable.unselected_btn);
+                    prevSelectB.setBackgroundResource(R.drawable.unselected_btn);
                     btn.setBackgroundResource(R.drawable.selected_btn);
                     DbQuery.g_quesList.get(quesID).setSelectedAns(option_num);
+                    changeStatus(quesID,ANSWERED);
                     prevSelectB = btn;
                 }
             }
 
         }
-
-        private void setOption(Button btn, int option_num, int quesId) {
-            if (DbQuery.g_quesList.get(quesId).getSelectedAns() == option_num) {
-                btn.setBackgroundResource(R.drawable.selected_btn);
-            } else
+        private  void changeStatus(int id,int status)
+        {
+            if(g_quesList.get(id).getStatus()!=REVIEW)
             {
-                btn.setBackgroundResource(R.drawable.unselected_btn);
+
+                g_quesList.get(id).setStatus(status);
             }
         }
+//        private void setOption(Button btn, int option_num, int quesId) {
+//            if (DbQuery.g_quesList.get(quesId).getSelectedAns() == option_num) {
+//                btn.setBackgroundResource(R.drawable.selected_btn);
+//            }
+//            else
+//            {
+//                btn.setBackgroundResource(R.drawable.unselected_btn);
+//            }
+//        }
+//    }
     }
 }

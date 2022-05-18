@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.Toolbar;
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ActivityMainBinding binding;
     private BottomNavigationView bottomNavigationView;
     private FrameLayout main_frame;
+    private TextView drawerProfileName,drawerProfileText;
     private BottomNavigationView.OnNavigationItemSelectedListener onNavigationItemSelectedListener=new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -80,9 +82,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //        drawer.addDrawerListener(toggle);
 //        toggle.syncState();
 
-        setFragement(new CategoryFragment());
+
         NavigationView navigationView = binding.navView;
         navigationView.setNavigationItemSelectedListener(this);
+        drawerProfileName=navigationView.getHeaderView(0).findViewById(R.id.nav_drawer_name);
+        drawerProfileText=navigationView.getHeaderView(0).findViewById(R.id.nav_drawer_text_img);
+        String name=DbQuery.myProfile.getName();
+        drawerProfileName.setText(name);
+        drawerProfileText.setText(name.toUpperCase().substring(0,1));
+
+
 
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -93,6 +102,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+        setFragement(new CategoryFragment());
     }
 
     @Override

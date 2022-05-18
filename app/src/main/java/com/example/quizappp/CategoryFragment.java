@@ -8,8 +8,7 @@ import android.widget.GridView;
 
 import androidx.fragment.app.Fragment;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.example.quizappp.Adapter.CategoryAdapter;
 
 /**
  * A simple {@link Fragment} subclass.

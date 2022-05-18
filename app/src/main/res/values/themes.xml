@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Quizappp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.Quizappp" parent="Theme.AppCompat.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/colr_200</item>
         <item name="colorPrimaryVariant">@color/colr_200</item>
@@ -23,7 +23,7 @@
 
     <style name="Theme.Quizappp.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="LoginTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="LoginTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/colr_700</item>
         <item name="colorPrimaryDark">#FFA500</item>

@@ -1,11 +1,14 @@
 package com.example.quizappp;
 
-import android.content.Context;
 import android.util.ArrayMap;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.example.quizappp.models.CategoryModel;
+import com.example.quizappp.models.Profilemodel;
+import com.example.quizappp.models.QuestionModel;
+import com.example.quizappp.models.RankModel;
+import com.example.quizappp.models.TestModel;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -25,9 +28,15 @@ public class DbQuery {
    public static  FirebaseFirestore g_Firestore;
    public static List<CategoryModel> g_catList=new ArrayList<>();
    public static List<TestModel> g_testList=new ArrayList<>();
+   public static Profilemodel myProfile=new Profilemodel("NA",null);
    public static int g_selected_cat_index=0;
    public static int g_selected_test_index=0;
    public static List<QuestionModel> g_quesList=new ArrayList<>();
+   public static RankModel myPerformance=new RankModel(0,-1);
+   public static final int NOT_VISITED=0;
+   public static final int UNANSWERED=1;
+   public static final int ANSWERED=2;
+   public static final int REVIEW=3;
 
    public static void createUserData(String email, String name, MyCompleteListener completeListener)
    {
@@ -53,7 +62,52 @@ public class DbQuery {
          }
       });
    }
-   public static void loadCategories(MyCompleteListener completeListener)
+public static void saveResult(int score,MyCompleteListener completeListener)
+{
+   WriteBatch batch=g_Firestore.batch();
+   DocumentReference userDoc=g_Firestore.collection("USERS").document(FirebaseAuth.getInstance().getUid());
+   batch.update(userDoc,"TOTAL_SCORE",score);
+   if(score > g_testList.get(g_selected_test_index).getTopScore())
+   {
+      DocumentReference scoreDoc=userDoc.collection("USER_DATA").document("MY_SCORES");
+      batch.update(scoreDoc,g_testList.get(g_selected_test_index).getTestID(),score);
+   }
+   batch.commit().addOnSuccessListener(new OnSuccessListener<Void>() {
+      @Override
+      public void onSuccess(Void unused) {
+          if(score >g_testList.get(g_selected_test_index).getTopScore())
+             g_testList.get(g_selected_test_index).getTopScore();
+          myPerformance.setScore(score);
+          completeListener.onSuccess();
+      }
+
+   }).addOnFailureListener(new OnFailureListener() {
+      @Override
+      public void onFailure(@NonNull Exception e) {
+         completeListener.onFailure();
+      }
+   });
+}
+
+public static void getUserData(MyCompleteListener completeListener)
+{
+   g_Firestore.collection("USERS").document(FirebaseAuth.getInstance().getUid()).
+           get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+      @Override
+      public void onSuccess(DocumentSnapshot documentSnapshot) {
+        myProfile.setName(documentSnapshot.getString("NAME"));
+        myProfile.setEmail(documentSnapshot.getString("EMAIL_ID"));
+        myPerformance.setScore(documentSnapshot.getLong("TOTAL_SCORE").intValue());
+        completeListener.onSuccess();
+      }
+   }).addOnFailureListener(new OnFailureListener() {
+      @Override
+      public void onFailure(@NonNull Exception e) {
+        completeListener.onFailure();
+      }
+   });
+}
+   public static void loadCategories(final MyCompleteListener completeListener)
    {
       g_catList.clear();
       g_Firestore.collection("QUIZ").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -84,7 +138,7 @@ public class DbQuery {
          }
       });
    }
-   public static void loadTestData(MyCompleteListener completeListener)
+   public static void loadTestData(final MyCompleteListener completeListener)
    {
       g_testList.clear();
       g_Firestore.collection("QUIZ").document(g_catList.get(g_selected_cat_index).getDocID())
@@ -109,6 +163,23 @@ public class DbQuery {
               });
 
    }
+
+   public static void loadData(MyCompleteListener completeListener)
+   {
+      loadCategories(new MyCompleteListener() {
+         @Override
+         public void onSuccess() {
+            getUserData(completeListener);
+         }
+
+         @Override
+         public void onFailure() {
+           completeListener.onFailure();
+         }
+      });
+
+   }
+
    public static void loadQuestions(MyCompleteListener completeListener)
    {
       g_quesList.clear();
@@ -126,7 +197,7 @@ public class DbQuery {
                        doc.getString("B"),
                        doc.getString("C"),
                        doc.getString("D"),
-                       doc.getLong("ANSWER").intValue(),-1
+                       doc.getLong("ANSWER").intValue(),-1,NOT_VISITED
                ));
             }
             completeListener.onSuccess();

@@ -1,4 +1,4 @@
-package com.example.quizappp;
+package com.example.quizappp.models;
 
 public class TestModel {
 

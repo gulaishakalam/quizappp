@@ -1,4 +1,4 @@
-package com.example.quizappp;
+package com.example.quizappp.models;
 
 public class QuestionModel {
     private String question;
@@ -8,8 +8,9 @@ public class QuestionModel {
     private  String optionD;
     private int correctAns;
     private int selectedAns;
+    private int status;
 
-    public QuestionModel(String question, String optionA, String optionB, String optionC, String optionD, int correctAns,int selectedAns) {
+    public QuestionModel(String question, String optionA, String optionB, String optionC, String optionD, int correctAns,int selectedAns,int status) {
         this.question = question;
         this.optionA = optionA;
         this.optionB = optionB;
@@ -17,6 +18,11 @@ public class QuestionModel {
         this.optionD = optionD;
         this.correctAns = correctAns;
         this.selectedAns=selectedAns;
+        this.status=status;
+    }
+    public int getStatus()
+    {
+        return status;
     }
     public int getSelectedAns() {
         return selectedAns;
@@ -74,6 +80,7 @@ public class QuestionModel {
     }
 
 
-
-
+    public void setStatus(int status) {
+        this.status=status;
+    }
 }
