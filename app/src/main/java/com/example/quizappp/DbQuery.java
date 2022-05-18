@@ -89,10 +89,11 @@ public static void saveResult(int score,MyCompleteListener completeListener)
    });
 }
 
-public static void getUserData(MyCompleteListener completeListener)
+public static void getUserData(final MyCompleteListener completeListener)
 {
-   g_Firestore.collection("USERS").document(FirebaseAuth.getInstance().getUid()).
-           get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+   g_Firestore.collection("USERS").document(FirebaseAuth.getInstance().getUid())
+           .get()
+           .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
       @Override
       public void onSuccess(DocumentSnapshot documentSnapshot) {
         myProfile.setName(documentSnapshot.getString("NAME"));

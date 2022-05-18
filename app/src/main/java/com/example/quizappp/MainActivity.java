@@ -41,13 +41,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             switch(item.getItemId())
             {
                 case R.id.nav_home:
-                    setFragement(new CategoryFragment());
+                    bottomNavigationView.setSelectedItemId(R.id.nav_home);
                     return true;
                 case R.id.nav_leaderboard:
-                    setFragement(new leaderboardFragment());
+                    bottomNavigationView.setSelectedItemId(R.id.nav_leaderboard);
                     return true;
                 case R.id.nav_account:
-                    setFragement(new AccountFragment());
+                    bottomNavigationView.setSelectedItemId(R.id.nav_account);
                     return true;
             }
 
@@ -144,11 +144,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.nav_home) {
-        } else if (id == R.id.nav_gallery) {
+            setFragement(new CategoryFragment());
+        } else if (id == R.id.nav_account) {
+            setFragement(new AccountFragment());
 
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_view) {
+        } else if (id == R.id.nav_leaderboard) {
+            setFragement(new leaderboardFragment());
 
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
