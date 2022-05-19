@@ -39,9 +39,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 case R.id.navigation_home:
                     setFragement(new CategoryFragment());
                     return true;
-                case R.id.navigation_leaderboard:
-                    setFragement(new leaderboardFragment());
-                    return true;
+//                case R.id.navigation_leaderboard:
+//                    setFragement(new leaderboardFragment());
+//                    return true;
                 case R.id.navigation_account:
                     setFragement(new AccountFragment());
                     return true;
@@ -59,6 +59,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         Toolbar toolbar=(Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+
+        getSupportActionBar().setTitle("Categories");
         setSupportActionBar(binding.appBarMain.toolbar);
 //        binding.appBarMain.fab.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -144,10 +148,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_account) {
             setFragement(new AccountFragment());
 
-        } else if (id == R.id.nav_leaderboard) {
-            setFragement(new leaderboardFragment());
-
         }
+//        else if (id == R.id.nav_leaderboard) {
+//            setFragement(new leaderboardFragment());
+//
+//        }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

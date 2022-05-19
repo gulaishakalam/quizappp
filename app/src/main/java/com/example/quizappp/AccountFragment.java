@@ -3,15 +3,21 @@ package com.example.quizappp;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.Locale;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,7 +34,10 @@ public class AccountFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private Button logoutB;
+    private LinearLayout logoutB,profileB;
+    private TextView profile_img_text,name,score;
+    private BottomNavigationView bottomNavigationView;
+
 
     public AccountFragment() {
         // Required empty public constructor
@@ -66,7 +75,15 @@ public class AccountFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_account, container, false);
-        logoutB=view.findViewById(R.id.logoutB);
+        initViews(view);
+       Toolbar toolbar=getActivity().findViewById(R.id.toolbar);
+
+       ((MainActivity)getActivity()).getSupportActionBar().setTitle("My Account");
+       String userName=DbQuery.myProfile.getName();
+       profile_img_text.setText(userName.toUpperCase().substring(0,1));
+       name.setText(userName);
+       score.setText(String.valueOf(DbQuery.myPerformance.getScore()));
+
         logoutB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -78,7 +95,23 @@ public class AccountFragment extends Fragment {
 
             }
         });
+
+        profileB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
         return view;
+    }
+
+    private void initViews(View view) {
+        logoutB=view.findViewById(R.id.logoutB);
+        profile_img_text=view.findViewById(R.id.profile_img_text);
+        name=view.findViewById(R.id.name);
+        score=view.findViewById(R.id.total_score);
+        profileB=view.findViewById(R.id.profileB);
+        bottomNavigationView=getActivity().findViewById(R.id.bottom_nav_bar);
     }
 
 }
