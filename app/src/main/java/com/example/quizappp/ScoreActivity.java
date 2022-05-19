@@ -21,6 +21,7 @@ public class ScoreActivity extends AppCompatActivity {
    private  Button leaderb,reattemptb,viewansb;
    private long timetaken;
    private Dialog progressDialog;
+   private Toolbar toolbar;
    private TextView dialogText;
    private int finalscore;
     @Override
@@ -28,7 +29,7 @@ public class ScoreActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score);
 
-        Toolbar toolbar=findViewById(R.id.toolbar);
+        toolbar=findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setTitle("Result");
@@ -43,20 +44,23 @@ public class ScoreActivity extends AppCompatActivity {
         progressDialog.show();
 
         init();
+        Toast.makeText(getApplicationContext(), "i m here", Toast.LENGTH_SHORT).show();
         loadData();
-        viewansb.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-             reattempt();
-            }
-        });
-        reattemptb.setOnClickListener(new View.OnClickListener() {
+        Toast.makeText(getApplicationContext(), "hii", Toast.LENGTH_SHORT).show();
+        /*viewansb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
             }
         });
+       reattemptb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                reattempt();
+            }
+        });*/
         saveResult();
+        Toast.makeText(getApplicationContext(), "hello", Toast.LENGTH_SHORT).show();
     }
 
     private void setSupportActionBar(Toolbar toolbar) {
@@ -102,7 +106,7 @@ public class ScoreActivity extends AppCompatActivity {
         finalscore=(correctq*100)/DbQuery.g_quesList.size();
         scoretv.setText(String.valueOf(finalscore));
 
-        timetaken=getIntent().getLongExtra("TIME_TAKEN",0);
+        timetaken=getIntent().getLongExtra("TIME TAKEN",0);
         String time=String.format("%02d:%02d min", TimeUnit.MILLISECONDS.toMinutes(timetaken),
                 TimeUnit.MILLISECONDS.toSeconds(timetaken)-
                         TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(timetaken))
@@ -110,7 +114,7 @@ public class ScoreActivity extends AppCompatActivity {
         timetv.setText(time);
 
     }
-    private void reattempt()
+   /* private void reattempt()
     {
        for(int i=0;i<DbQuery.g_quesList.size();i++)
        {
@@ -119,7 +123,7 @@ public class ScoreActivity extends AppCompatActivity {
        }
        Intent intent=new Intent(ScoreActivity.this,StartTestActivity.class);
        startActivity(intent);
-    }
+    }*/
     private void saveResult()
     {
         DbQuery.saveResult(finalscore, new MyCompleteListener() {

@@ -1,7 +1,7 @@
 package com.example.quizappp.Adapter;
 
 import static com.example.quizappp.DbQuery.ANSWERED;
-import static com.example.quizappp.DbQuery.REVIEW;
+/*import static com.example.quizappp.DbQuery.REVIEW;*/
 import static com.example.quizappp.DbQuery.UNANSWERED;
 import static com.example.quizappp.DbQuery.g_quesList;
 
@@ -104,33 +104,33 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
             if (prevSelectB == null) {
                 btn.setBackgroundResource(R.drawable.selected_btn);
                 DbQuery.g_quesList.get(quesID).setSelectedAns(option_num);
-                changeStatus(quesID,ANSWERED);
+                /*changeStatus(quesID,ANSWERED);*/
                 prevSelectB = btn;
             } else {
                 if (prevSelectB.getId() == btn.getId())//if button selected by user is alreasy selected then unselect it
                 {
                     btn.setBackgroundResource(R.drawable.unselected_btn);
                     DbQuery.g_quesList.get(quesID).setSelectedAns(-1);//no option is selected
-                    changeStatus(quesID,UNANSWERED);
+                   /* changeStatus(quesID,UNANSWERED);*/
                     prevSelectB = null;
                 } else {
                     prevSelectB.setBackgroundResource(R.drawable.unselected_btn);
                     btn.setBackgroundResource(R.drawable.selected_btn);
                     DbQuery.g_quesList.get(quesID).setSelectedAns(option_num);
-                    changeStatus(quesID,ANSWERED);
+                    /*changeStatus(quesID,ANSWERED);*/
                     prevSelectB = btn;
                 }
             }
 
         }
-        private  void changeStatus(int id,int status)
+      /*  private  void changeStatus(int id,int status)
         {
             if(g_quesList.get(id).getStatus()!=REVIEW)
             {
 
                 g_quesList.get(id).setStatus(status);
             }
-        }
+        }*/
 //        private void setOption(Button btn, int option_num, int quesId) {
 //            if (DbQuery.g_quesList.get(quesId).getSelectedAns() == option_num) {
 //                btn.setBackgroundResource(R.drawable.selected_btn);

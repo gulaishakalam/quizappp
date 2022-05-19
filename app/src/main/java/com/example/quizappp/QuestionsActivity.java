@@ -2,7 +2,7 @@ package com.example.quizappp;
 
 import static com.example.quizappp.DbQuery.ANSWERED;
 import static com.example.quizappp.DbQuery.NOT_VISITED;
-import static com.example.quizappp.DbQuery.REVIEW;
+/*import static com.example.quizappp.DbQuery.REVIEW;*/
 import static com.example.quizappp.DbQuery.UNANSWERED;
 import static com.example.quizappp.DbQuery.g_catList;
 import static com.example.quizappp.DbQuery.g_quesList;
@@ -29,6 +29,7 @@ import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.quizappp.Adapter.QuestionGridAdapter;
 import com.example.quizappp.Adapter.QuestionsAdapter;
@@ -103,14 +104,14 @@ public class QuestionsActivity extends AppCompatActivity {
                 quesId=recyclerView.getLayoutManager().getPosition(view);
                 if(g_quesList.get(quesId).getStatus()==NOT_VISITED)//it will check whether the answer is visite or not
                     g_quesList.get(quesId).setStatus(UNANSWERED);
-                if(g_quesList.get(quesId).getStatus()==REVIEW)
+               /* if(g_quesList.get(quesId).getStatus()==REVIEW)
                 {
                     markImage.setVisibility(View.VISIBLE);
                 }
                 else
                 {
                     markImage.setVisibility(View.GONE);
-                }
+                }*/
 
                 tvQuesid.setText(String.valueOf(quesId+1)+"/"+String.valueOf(g_quesList.size()));
             }
@@ -167,7 +168,7 @@ public class QuestionsActivity extends AppCompatActivity {
                 {
 
                     markImage.setVisibility(View.VISIBLE);
-                    g_quesList.get(quesId).setStatus(REVIEW);
+                    /*g_quesList.get(quesId).setStatus(REVIEW);*/
                     gridAdapter.notifyDataSetChanged();
                 }
                 else
@@ -213,13 +214,21 @@ public class QuestionsActivity extends AppCompatActivity {
               alertDialog.dismiss();
 
                 Intent intent=new Intent(QuestionsActivity.this,ScoreActivity.class);
+
                 long totaltime=g_testList.get(g_selected_test_index).getTime()*60*1000;
-                intent.putExtra("Time taken",totaltime-timeleft);
+
+                intent.putExtra("TIME TAKEN",totaltime-timeleft);
+
                 startActivity(intent);
+
                 QuestionsActivity.this.finish();
+
              }
+
         });
+
         alertDialog.show();
+
     }
     public void goToquestion(int position)
     {
@@ -247,7 +256,7 @@ public class QuestionsActivity extends AppCompatActivity {
             public void onFinish() {
                 Intent intent=new Intent(QuestionsActivity.this,ScoreActivity.class);
                 long totaltime=g_testList.get(g_selected_test_index).getTime()*60*1000;
-                intent.putExtra("Time taken",totaltime-timeleft);
+                intent.putExtra("TIME TAKEN",totaltime-timeleft);
                 startActivity(intent);
                 QuestionsActivity.this.finish();
             }

@@ -36,7 +36,7 @@ public class DbQuery {
    public static final int NOT_VISITED=0;
    public static final int UNANSWERED=1;
    public static final int ANSWERED=2;
-   public static final int REVIEW=3;
+   /*public static final int REVIEW=3;*/
 
    public static void createUserData(String email, String name, MyCompleteListener completeListener)
    {
@@ -67,16 +67,16 @@ public static void saveResult(int score,MyCompleteListener completeListener)
    WriteBatch batch=g_Firestore.batch();
    DocumentReference userDoc=g_Firestore.collection("USERS").document(FirebaseAuth.getInstance().getUid());
    batch.update(userDoc,"TOTAL_SCORE",score);
-   if(score > g_testList.get(g_selected_test_index).getTopScore())
+  /* if(score > g_testList.get(g_selected_test_index).getTopScore())
    {
       DocumentReference scoreDoc=userDoc.collection("USER_DATA").document("MY_SCORES");
       batch.update(scoreDoc,g_testList.get(g_selected_test_index).getTestID(),score);
-   }
+   }*/
    batch.commit().addOnSuccessListener(new OnSuccessListener<Void>() {
       @Override
       public void onSuccess(Void unused) {
-          if(score >g_testList.get(g_selected_test_index).getTopScore())
-             g_testList.get(g_selected_test_index).getTopScore();
+         /* if(score >g_testList.get(g_selected_test_index).getTopScore())
+             g_testList.get(g_selected_test_index).setTopScore(score);*/
           myPerformance.setScore(score);
           completeListener.onSuccess();
       }
