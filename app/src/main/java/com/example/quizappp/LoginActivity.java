@@ -38,7 +38,7 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private Dialog progressDialog;
     private TextView dialogText;
-    private RelativeLayout gSignB;
+
 
 
 
@@ -51,7 +51,7 @@ public class LoginActivity extends AppCompatActivity {
         loginb = findViewById(R.id.loginb);
         forgotpassb = findViewById(R.id.forgot_password);
         signupb = findViewById(R.id.signupb);
-        gSignB = findViewById(R.id.g_signB);
+
 
         progressDialog = new Dialog(LoginActivity.this);
         progressDialog.setContentView(R.layout.dialog_layout);
@@ -78,12 +78,7 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        gSignB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-            }
-        });
     }
 
 

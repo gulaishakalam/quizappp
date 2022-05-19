@@ -1,14 +1,11 @@
 package com.example.quizappp;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -26,7 +23,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.quizappp.databinding.ActivityMainBinding;
-import com.google.android.material.snackbar.Snackbar;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -40,14 +36,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch(item.getItemId())
             {
-                case R.id.nav_home:
-                    bottomNavigationView.setSelectedItemId(R.id.nav_home);
+                case R.id.navigation_home:
+                    setFragement(new CategoryFragment());
                     return true;
-                case R.id.nav_leaderboard:
-                    bottomNavigationView.setSelectedItemId(R.id.nav_leaderboard);
+                case R.id.navigation_leaderboard:
+                    setFragement(new leaderboardFragment());
                     return true;
-                case R.id.nav_account:
-                    bottomNavigationView.setSelectedItemId(R.id.nav_account);
+                case R.id.navigation_account:
+                    setFragement(new AccountFragment());
                     return true;
             }
 
@@ -83,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //        toggle.syncState();
 
 
-        NavigationView navigationView = binding.navView;
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         drawerProfileName=navigationView.getHeaderView(0).findViewById(R.id.nav_drawer_name);
         drawerProfileText=navigationView.getHeaderView(0).findViewById(R.id.nav_drawer_text_img);

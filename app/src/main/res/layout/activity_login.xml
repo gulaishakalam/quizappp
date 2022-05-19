@@ -131,39 +131,7 @@
         app:layout_constraintStart_toEndOf="@+id/textView4"
         app:layout_constraintTop_toBottomOf="@+id/loginb" />
 
-    <RelativeLayout
-        android:layout_width="0dp"
-        android:id="@+id/g_signB"
-        android:layout_height="40dp"
-        android:layout_marginStart="64dp"
-        android:layout_marginEnd="64dp"
-        android:layout_marginBottom="64dp"
-        android:background="@color/colr_700"
-        android:gravity="center_vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:id="@+id/g_img"
 
-            android:src="@drawable/ic_google_logo"
-            android:background="@color/white"
-            android:padding="4dp"
-            android:layout_margin="4dp"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="Sign In with Google"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:layout_toEndOf="@+id/g_img"
-            android:layout_marginLeft="24dp"
-            android:gravity="center_vertical"/>
-
-    </RelativeLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -36,7 +36,7 @@ public class DbQuery {
    public static final int NOT_VISITED=0;
    public static final int UNANSWERED=1;
    public static final int ANSWERED=2;
-   /*public static final int REVIEW=3;*/
+   public static final int REVIEW=3;
 
    public static void createUserData(String email, String name, MyCompleteListener completeListener)
    {
@@ -97,7 +97,7 @@ public static void getUserData(final MyCompleteListener completeListener)
       @Override
       public void onSuccess(DocumentSnapshot documentSnapshot) {
         myProfile.setName(documentSnapshot.getString("NAME"));
-        myProfile.setEmail(documentSnapshot.getString("EMAIL_ID"));
+        myProfile.setEmail(documentSnapshot.getString("EMAIL"));
         myPerformance.setScore(documentSnapshot.getLong("TOTAL_SCORE").intValue());
         completeListener.onSuccess();
       }

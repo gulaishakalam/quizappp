@@ -2,7 +2,7 @@ package com.example.quizappp.Adapter;
 
 import static com.example.quizappp.DbQuery.ANSWERED;
 import static com.example.quizappp.DbQuery.NOT_VISITED;
-/*import static com.example.quizappp.DbQuery.REVIEW;*/
+import static com.example.quizappp.DbQuery.REVIEW;
 import static com.example.quizappp.DbQuery.UNANSWERED;
 
 import android.content.Context;
@@ -73,9 +73,9 @@ public class QuestionGridAdapter extends BaseAdapter {
                 case ANSWERED:
                     questv.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(myview.getContext(),R.color.green)));
                     break;
-               /*case REVIEW:
+                case REVIEW:
                     questv.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(myview.getContext(),R.color.pink)));
-                    break;*/
+                    break;
                 default:
                     break;
 

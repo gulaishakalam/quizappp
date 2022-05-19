@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
@@ -18,7 +19,8 @@ import java.util.concurrent.TimeUnit;
 
 public class ScoreActivity extends AppCompatActivity {
     private TextView scoretv,timetv,totaltv,correctqtv,wrongqtv,unattemptedqtv;
-   private  Button leaderb,reattemptb,viewansb;
+   private  Button reattemptb,viewansb;
+    private ImageView backB1;
    private long timetaken;
    private Dialog progressDialog;
    private Toolbar toolbar;
@@ -29,11 +31,13 @@ public class ScoreActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score);
 
-        toolbar=findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(true);
-        getSupportActionBar().setTitle("Result");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+//        toolbar=findViewById(R.id.toolbar);
+//
+//        setSupportActionBar(toolbar);
+//        getSupportActionBar().setDisplayShowTitleEnabled(true);
+//        getSupportActionBar().setTitle("Result");
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         progressDialog = new Dialog(ScoreActivity.this);
         progressDialog.setContentView(R.layout.dialog_layout);
@@ -44,13 +48,22 @@ public class ScoreActivity extends AppCompatActivity {
         progressDialog.show();
 
         init();
-        Toast.makeText(getApplicationContext(), "i m here", Toast.LENGTH_SHORT).show();
+
         loadData();
-        Toast.makeText(getApplicationContext(), "hii", Toast.LENGTH_SHORT).show();
-        /*viewansb.setOnClickListener(new View.OnClickListener() {
+
+        viewansb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
+            }
+        });
+        backB1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent=new Intent(ScoreActivity.this,MainActivity.class);
+                startActivity(intent);
+                ScoreActivity.this.finish();
             }
         });
        reattemptb.setOnClickListener(new View.OnClickListener() {
@@ -58,9 +71,9 @@ public class ScoreActivity extends AppCompatActivity {
             public void onClick(View view) {
                 reattempt();
             }
-        });*/
+        });
         saveResult();
-        Toast.makeText(getApplicationContext(), "hello", Toast.LENGTH_SHORT).show();
+
     }
 
     private void setSupportActionBar(Toolbar toolbar) {
@@ -74,7 +87,8 @@ public class ScoreActivity extends AppCompatActivity {
         correctqtv=findViewById(R.id.correct);
         wrongqtv=findViewById(R.id.wrong);
         unattemptedqtv=findViewById(R.id.unattempted);
-        leaderb=findViewById(R.id.leaderboard);
+        backB1=findViewById(R.id.backB1);
+
         reattemptb=findViewById(R.id.reattempt);
        viewansb=findViewById(R.id.view_ans);
     }
@@ -114,7 +128,7 @@ public class ScoreActivity extends AppCompatActivity {
         timetv.setText(time);
 
     }
-   /* private void reattempt()
+    private void reattempt()
     {
        for(int i=0;i<DbQuery.g_quesList.size();i++)
        {
@@ -123,7 +137,7 @@ public class ScoreActivity extends AppCompatActivity {
        }
        Intent intent=new Intent(ScoreActivity.this,StartTestActivity.class);
        startActivity(intent);
-    }*/
+    }
     private void saveResult()
     {
         DbQuery.saveResult(finalscore, new MyCompleteListener() {

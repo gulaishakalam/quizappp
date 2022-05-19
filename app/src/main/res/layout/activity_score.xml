@@ -7,15 +7,28 @@
     android:background="@color/main_background"
     tools:context=".ScoreActivity">
 
+    <ImageView
+        android:id="@+id/backB1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="3dp"
+        android:padding="16dp"
+        app:layout_constraintStart_toStartOf="@+id/toolbar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_back"
+
+        />
+
     <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colr_200"
-        android:id="@+id/toolbar"
+        android:textAlignment="center"
         android:theme="@style/ThemeOverlay.AppCompat.Dark"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -246,21 +259,7 @@
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/leaderboard"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:background="@color/white"
-            android:drawableRight="@drawable/ic_right"
-            android:drawablePadding="16dp"
-            android:drawableTint="@color/colr_700"
-            android:elevation="5dp"
-            android:stateListAnimator="@null"
-            android:text="Check Your Ranking in Leaderboard"
-            android:textColor="#827717"
-            android:translationZ="3dp" />
+
 
     </LinearLayout>
 

@@ -2,7 +2,7 @@ package com.example.quizappp;
 
 import static com.example.quizappp.DbQuery.ANSWERED;
 import static com.example.quizappp.DbQuery.NOT_VISITED;
-/*import static com.example.quizappp.DbQuery.REVIEW;*/
+import static com.example.quizappp.DbQuery.REVIEW;
 import static com.example.quizappp.DbQuery.UNANSWERED;
 import static com.example.quizappp.DbQuery.g_catList;
 import static com.example.quizappp.DbQuery.g_quesList;
@@ -78,7 +78,7 @@ public class QuestionsActivity extends AppCompatActivity {
         timertv=findViewById(R.id.tv_timer);
         catnametv=findViewById(R.id.qa_catname);
         submitB=findViewById(R.id.submit);
-        markB=findViewById(R.id.clear_selB);
+       /* markB=findViewById(R.id.clear_selB);*/
         prevQuesB=findViewById(R.id.prev_quesB);
         nextquesB=findViewById(R.id.next_quesB);
         quesListB=findViewById(R.id.ques_list_gridB);
@@ -104,14 +104,14 @@ public class QuestionsActivity extends AppCompatActivity {
                 quesId=recyclerView.getLayoutManager().getPosition(view);
                 if(g_quesList.get(quesId).getStatus()==NOT_VISITED)//it will check whether the answer is visite or not
                     g_quesList.get(quesId).setStatus(UNANSWERED);
-               /* if(g_quesList.get(quesId).getStatus()==REVIEW)
+                if(g_quesList.get(quesId).getStatus()==REVIEW)
                 {
                     markImage.setVisibility(View.VISIBLE);
                 }
                 else
                 {
                     markImage.setVisibility(View.GONE);
-                }*/
+                }
 
                 tvQuesid.setText(String.valueOf(quesId+1)+"/"+String.valueOf(g_quesList.size()));
             }
@@ -161,14 +161,14 @@ public class QuestionsActivity extends AppCompatActivity {
                 }
             }
         });
-        markB.setOnClickListener(new View.OnClickListener() {
+        /*markB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(markImage.getVisibility() != View.VISIBLE)//it was not reviewed
                 {
 
                     markImage.setVisibility(View.VISIBLE);
-                    /*g_quesList.get(quesId).setStatus(REVIEW);*/
+                    g_quesList.get(quesId).setStatus(REVIEW);
                     gridAdapter.notifyDataSetChanged();
                 }
                 else
@@ -184,7 +184,7 @@ public class QuestionsActivity extends AppCompatActivity {
                     }
                 }
             }
-        });
+        });*/
         submitB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
