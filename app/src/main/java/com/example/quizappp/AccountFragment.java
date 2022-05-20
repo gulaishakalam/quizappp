@@ -99,6 +99,8 @@ public class AccountFragment extends Fragment {
         profileB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent=new Intent(getContext(),MyprofileActivity.class);
+                startActivity(intent);
 
             }
         });

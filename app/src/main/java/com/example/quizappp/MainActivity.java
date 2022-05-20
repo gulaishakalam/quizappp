@@ -145,10 +145,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
         if (id == R.id.nav_home) {
             setFragement(new CategoryFragment());
-        } else if (id == R.id.nav_account) {
-            setFragement(new AccountFragment());
-
         }
+//        else if (id == R.id.nav_account) {
+//            setFragement(new AccountFragment());
+//
+//        }
 //        else if (id == R.id.nav_leaderboard) {
 //            setFragement(new leaderboardFragment());
 //

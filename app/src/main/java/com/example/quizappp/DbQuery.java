@@ -88,6 +88,24 @@ public static void saveResult(int score,MyCompleteListener completeListener)
       }
    });
 }
+public static void saveProfileData(String name,MyCompleteListener completeListener)
+{
+   Map<String , Object> profileData=new ArrayMap<>();
+   profileData.put("NAME",name);
+   g_Firestore.collection("USERS").document(FirebaseAuth.getInstance().getUid())
+           .update(profileData).addOnSuccessListener(new OnSuccessListener<Void>() {
+      @Override
+      public void onSuccess(Void unused) {
+         myProfile.setName(name);
+         completeListener.onSuccess();
+      }
+   }).addOnFailureListener(new OnFailureListener() {
+      @Override
+      public void onFailure(@NonNull Exception e) {
+         completeListener.onFailure();
+      }
+   });
+}
 
 public static void getUserData(final MyCompleteListener completeListener)
 {
